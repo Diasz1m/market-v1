@@ -1,0 +1,1 @@
+Tentando fazer um bot para analizar acoes da B3

@@ -1,10 +1,19 @@
-"import yfinance as yf" 
 
 import yfinance as yf
+from pyppetter.launcher import launcher
 
 def get_stock_data(ticker):
     stock = yf.Ticker(ticker)
     return stock.history(period="max")
+
+async def get_stock_info(browser):
+    url = "https://www.fundamentus.com.br/resultado.php";
+    page = await browser.newPage();
+    page.goto(url);
+    elements = await page.querySelector(".tips");
+    acao = await elements.evaluate('(element) => element.textContent');
+    print(acao)
+
 
 ##TODO aqui fazer uma função para listar as ações da b3
 ## vou tentar fazer um webscraping para pegar as ações da b3
@@ -37,6 +46,8 @@ def listar_acoes_b3():
 
 if __name__ == "__main__":
     print("Listando principais ações da B3:")
-    listar_acoes_b3()
+##    listar_acoes_b3()
+    browser = launcher();
+    get_stock_info(browser);
 
 
